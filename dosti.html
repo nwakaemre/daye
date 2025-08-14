@@ -1,0 +1,436 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Gardaş Şov 🎉</title>
+    <meta name="theme-color" content="#0f172a" />
+    <style>
+        :root {
+            --bg1: #0f172a;
+            --bg2: #111827;
+            --ink: #e5e7eb;
+            --c1: #22d3ee;
+            --c2: #a78bfa;
+            --c3: #f472b6;
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        html, body {
+            height: 100%
+        }
+
+        body {
+            margin: 0;
+            color: var(--ink);
+            font-family: system-ui,-apple-system,"Segoe UI",Roboto,Arial;
+            background: radial-gradient(1200px 800px at 10% 10%, #1f2937 35%, transparent 70%), radial-gradient(900px 700px at 90% 90%, #0b1220 35%, transparent 70%), linear-gradient(120deg,var(--bg1),var(--bg2));
+            overflow: hidden;
+            display: grid;
+            place-items: center;
+        }
+
+        .wrap {
+            position: relative;
+            z-index: 2;
+            width: min(1200px,96vw);
+            padding: 16px;
+            text-align: center
+        }
+
+        /* Intro kartı */
+        .card {
+            margin: auto;
+            padding: clamp(22px,5vw,36px);
+            border-radius: 22px;
+            background: rgba(255,255,255,.06);
+            border: 1px solid rgba(255,255,255,.18);
+            backdrop-filter: blur(14px) saturate(120%);
+            -webkit-backdrop-filter: blur(14px) saturate(120%);
+            box-shadow: 0 18px 42px rgba(0,0,0,.38);
+            animation: fade .6s ease both;
+        }
+
+        @keyframes fade {
+            from {
+                opacity: 0;
+                transform: translateY(8px)
+            }
+
+            to {
+                opacity: 1;
+                transform: none
+            }
+        }
+
+        .title {
+            margin: 2px 0 10px;
+            font-size: clamp(28px,7vw,56px);
+            background: linear-gradient(90deg,var(--c1),var(--c2),var(--c3));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 4px 24px rgba(34,211,238,.35);
+        }
+
+        .lead {
+            opacity: .9;
+            margin: 0 0 14px;
+            font-size: clamp(14px,4.6vw,18px)
+        }
+
+        .btn {
+            margin-top: 4px;
+            border: 0;
+            border-radius: 14px;
+            cursor: pointer;
+            color: #0b1220;
+            background: linear-gradient(135deg,var(--c1),var(--c2));
+            padding: 14px 22px;
+            font-size: clamp(15px,4.8vw,18px);
+            box-shadow: 0 12px 28px rgba(0,0,0,.35);
+            transition: transform .08s ease, filter .2s ease;
+        }
+
+            .btn:active {
+                transform: scale(.98)
+            }
+
+        .hint {
+            opacity: .75;
+            margin-top: 6px;
+            font-size: 12px
+        }
+
+        /* === Masaüstü sahnesi (3 kart) === */
+        .stageGrid {
+            margin: 22px auto 0;
+            display: grid;
+            gap: 22px;
+            justify-items: center;
+            grid-template-columns: repeat(3, 1fr);
+            max-width: 1200px;
+            perspective: 1000px;
+            transform: translateY(10px);
+            opacity: 0;
+            transition: opacity .5s ease, transform .5s ease;
+        }
+
+            .stageGrid.show {
+                opacity: 1;
+                transform: none
+            }
+
+        .card3d {
+            position: relative;
+            width: min(94vw,360px);
+            height: min(64vh,460px);
+            border-radius: 22px;
+            overflow: hidden;
+            transform-style: preserve-3d;
+            border: 3px solid rgba(255,255,255,.9);
+            box-shadow: 0 16px 40px rgba(0,0,0,.55);
+            opacity: 0;
+        }
+
+            .card3d img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover
+            }
+
+        .stageGrid.show .card3d:nth-child(1) {
+            animation: swirlIn .9s cubic-bezier(.18,.88,.22,1.05) .00s forwards
+        }
+
+        .stageGrid.show .card3d:nth-child(2) {
+            animation: flipIn .9s cubic-bezier(.18,.88,.22,1.05) .22s forwards
+        }
+
+        .stageGrid.show .card3d:nth-child(3) {
+            animation: riseIn .9s cubic-bezier(.18,.88,.22,1.05) .44s forwards
+        }
+
+        @keyframes swirlIn {
+            0% {
+                opacity: 0;
+                transform: translateY(50px) scale(.85) rotate(-12deg)
+            }
+
+            60% {
+                opacity: 1;
+                transform: translateY(-8px) scale(1.04) rotate(4deg)
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1) rotate(0)
+            }
+        }
+
+        @keyframes flipIn {
+            0% {
+                opacity: 0;
+                transform: rotateY(-70deg) translateZ(-120px) scale(.9)
+            }
+
+            60% {
+                opacity: 1;
+                transform: rotateY(8deg) translateZ(0) scale(1.04)
+            }
+
+            100% {
+                opacity: 1;
+                transform: rotateY(0) translateZ(0) scale(1)
+            }
+        }
+
+        @keyframes riseIn {
+            0% {
+                opacity: 0;
+                transform: translateY(70px) rotateX(12deg) scale(.9)
+            }
+
+            60% {
+                opacity: 1;
+                transform: translateY(-6px) rotateX(2deg) scale(1.03)
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0) rotateX(0) scale(1)
+            }
+        }
+
+        /* === Mobil sahnesi (tek foto – kaydırılabilir) === */
+        .stageMobile {
+            margin: 16px auto 0;
+            width: 100%;
+            display: grid;
+            place-items: center;
+            opacity: 0;
+            transform: translateY(8px);
+            transition: opacity .45s ease, transform .45s ease;
+        }
+
+            .stageMobile.show {
+                opacity: 1;
+                transform: none
+            }
+
+        .viewer {
+            width: 92vw;
+            max-width: 520px;
+            height: 70vh;
+            max-height: 76vh;
+            border-radius: 22px;
+            overflow: hidden;
+            position: relative;
+            border: 3px solid rgba(255,255,255,.9);
+            box-shadow: 0 16px 40px rgba(0,0,0,.55);
+            background: #000;
+        }
+
+            .viewer img {
+                position: absolute;
+                inset: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                opacity: 0
+            }
+
+                .viewer img.active {
+                    opacity: 1;
+                    transition: opacity .35s ease
+                }
+
+        .dots {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            margin-top: 10px
+        }
+
+        .dot {
+            width: 9px;
+            height: 9px;
+            border-radius: 999px;
+            background: #6b7280;
+            opacity: .8
+        }
+
+            .dot.on {
+                background: linear-gradient(135deg,var(--c1),var(--c2));
+                opacity: 1
+            }
+
+        /* Mobil/PC görünürlük */
+        @media (max-width:699px) {
+            .stageGrid {
+                display: none
+            }
+        }
+
+        @media (min-width:700px) {
+            .stageMobile {
+                display: none
+            }
+        }
+
+        .hidden {
+            display: none
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <!-- Intro -->
+        <div id="intro" class="card">
+            <div class="title">Gardaş, butona tıkla şovu gör 🎇</div>
+            <p class="lead">Telefonda tek fotoğrafı büyük gösterir; kaydırarak gezersin. PC’de üçü birden şık animasyonla gelir.</p>
+            <button id="goBtn" class="btn">Tıkla, Şov Başlasın ▶️</button>
+            <div class="hint">Müzik çalmazsa bir kez daha dokun.</div>
+        </div>
+
+        <!-- Masaüstü sahnesi (3 kart) -->
+        <div id="stageGrid" class="stageGrid">
+            <figure class="card3d"><img id="g1" alt="dost1"></figure>
+            <figure class="card3d"><img id="g2" alt="dost2"></figure>
+            <figure class="card3d"><img id="g3" alt="dost3"></figure>
+        </div>
+
+        <!-- Mobil sahnesi (tek foto – swipe) -->
+        <div id="stageMobile" class="stageMobile">
+            <div class="viewer" id="viewer">
+                <img id="m1" alt="dost1">
+                <img id="m2" alt="dost2">
+                <img id="m3" alt="dost3">
+            </div>
+            <div class="dots"><span class="dot" id="d1"></span><span class="dot" id="d2"></span><span class="dot" id="d3"></span></div>
+        </div>
+    </div>
+
+    <!-- Müzik -->
+    <audio id="music" src="./sarki.mp3" preload="auto" playsinline></audio>
+
+    <script>
+        /* ==== Ayarlar ==== */
+        const exts = ['jpeg', 'jpg', 'png', 'webp', 'jfif'];
+        const bases = ['dost1', 'dost2', 'dost3'];
+
+        const gridImgs = [document.getElementById('g1'), document.getElementById('g2'), document.getElementById('g3')];
+        const mobImgs = [document.getElementById('m1'), document.getElementById('m2'), document.getElementById('m3')];
+
+        function loadAuto(imgEl, base) {
+            let i = 0;
+            (function tryNext() {
+                if (i >= exts.length) { console.warn(base, 'bulunamadı'); imgEl.alt = base + ' bulunamadı'; return; }
+                const url = `./${base}.${exts[i]}?v=${Date.now()}`;
+                const test = new Image();
+                test.onload = () => imgEl.src = url;
+                test.onerror = () => { i++; tryNext(); };
+                test.src = url;
+            })();
+        }
+        [...gridImgs, ...mobImgs].forEach((img, idx) => loadAuto(img, bases[idx % 3]));
+
+        /* ==== Ses kilidi çözümü ==== */
+        const music = document.getElementById('music');
+        const btn = document.getElementById('goBtn');
+        const intro = document.getElementById('intro');
+        const stageGrid = document.getElementById('stageGrid');
+        const stageMobile = document.getElementById('stageMobile');
+
+        const unlock = () => {
+            music.muted = false; music.volume = 1.0;
+            music.play().then(() => { music.pause(); music.currentTime = 0; }).catch(() => { });
+            window.removeEventListener('pointerdown', unlock);
+            window.removeEventListener('touchstart', unlock);
+        };
+        window.addEventListener('pointerdown', unlock, { passive: true });
+        window.addEventListener('touchstart', unlock, { passive: true });
+
+        /* ==== Mobil görüntüleyici: swipe/tap ile geçiş ==== */
+        let current = 0;
+        const mobDots = [document.getElementById('d1'), document.getElementById('d2'), document.getElementById('d3')];
+        function showMobile(i) {
+            mobImgs.forEach((im, ix) => im.classList.toggle('active', ix === i));
+            mobDots.forEach((d, ix) => d.classList.toggle('on', ix === i));
+            current = i;
+        }
+        showMobile(0);
+
+        // swipe
+        (function enableSwipe() {
+            const el = document.getElementById('viewer');
+            let sx = 0, dx = 0, touching = false;
+            const start = e => { touching = true; sx = (e.touches ? e.touches[0].clientX : e.clientX); };
+            const move = e => { if (!touching) return; dx = (e.touches ? e.touches[0].clientX : e.clientX) - sx; };
+            const end = () => {
+                if (!touching) return; touching = false;
+                if (Math.abs(dx) > 40) {
+                    if (dx < 0) showMobile((current + 1) % 3); else showMobile((current + 2) % 3);
+                }
+                dx = 0;
+            };
+            el.addEventListener('touchstart', start, { passive: true });
+            el.addEventListener('touchmove', move, { passive: true });
+            el.addEventListener('touchend', end, { passive: true });
+            el.addEventListener('pointerdown', start);
+            el.addEventListener('pointermove', move);
+            el.addEventListener('pointerup', end);
+        })();
+
+        /* ==== Konfeti (kısa) ==== */
+        function spawn() {
+            const el = document.createElement('div');
+            el.className = 'p';
+            el.textContent = ['🎉', '✨', '⭐', '🎊', '💫', '🔥'][Math.floor(Math.random() * 6)];
+            const vw = Math.max(document.documentElement.clientWidth, innerWidth || 0);
+            const vh = Math.max(document.documentElement.clientHeight, innerHeight || 0);
+            const x = Math.random() * vw, size = 18 + Math.random() * 26;
+            const drift = (Math.random() * 80) - 40, duration = 2200 + Math.random() * 2200;
+            el.style.cssText = `left:${x}px; top:${vh + 20}px; font-size:${size}px; opacity:0; position:fixed; pointer-events:none; z-index:3; text-shadow:0 2px 10px rgba(0,0,0,.35)`;
+            document.body.appendChild(el);
+            const start = performance.now(), startY = vh + 20, endY = vh * 0.2 + Math.random() * vh * 0.25;
+            (function anim(t) {
+                const p = Math.min(1, (t - start) / duration), ease = 1 - Math.pow(1 - p, 3);
+                const y = startY - (startY - endY) * ease, xOff = Math.sin(ease * 6 + (x % 13)) * 12 + drift * ease;
+                el.style.transform = `translate(${xOff}px, ${y - startY}px)`; el.style.opacity = (p < .08 ? p * 12 : (1 - p) * 1.3);
+                if (p < 1) requestAnimationFrame(anim); else el.remove();
+            })(start);
+        }
+        function rain() { for (let i = 0; i < 28; i++) setTimeout(spawn, i * 45); }
+
+        /* ==== Şov başlat ==== */
+        btn.addEventListener('click', async () => {
+            intro.classList.add('hidden');
+            if (window.matchMedia('(max-width:699px)').matches) {
+                stageMobile.classList.add('show');
+            } else {
+                stageGrid.classList.add('show');
+            }
+            rain();
+
+            try {
+                if (music.readyState < 2) music.load();
+                music.currentTime = 0; music.muted = false; music.volume = 1.0;
+                await music.play();
+            } catch (e) {
+                const tryPlay = async () => {
+                    music.removeEventListener('canplay', tryPlay);
+                    try { await music.play(); } catch (err) {
+                        music.setAttribute('controls', 'controls');
+                        alert('Tarayıcı müziği engelledi. Play’e bas.');
+                    }
+                };
+                music.addEventListener('canplay', tryPlay, { once: true });
+            }
+        });
+    </script>
+</body>
+</html>
